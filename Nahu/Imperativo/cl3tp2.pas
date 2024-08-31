@@ -56,13 +56,12 @@ type
         HD: arbolDos;
     end;
     
-        listaVentas = ^nodoVenta; //Lista de ventas iii
+    listaVentas = ^nodoVenta; //Lista de ventas iii
     nodoVenta = record
         dato: venta;
         sig: listaVentas;
     end;
     
-
     ventaList = record // Registro de ventas iii
         cod: integer;
         ventas: listaVentas;
@@ -157,32 +156,33 @@ begin
     end;
 end;
 
-procedure agregarTres(var a3: arbolTres; v: venta);
+procedure agregarAd(var l: listaVentas; v: venta);
 var
-    nuevo: listaVentas;
-    aux: listaVentas;
+    nue: listaVentas;
 begin
-    if (a3 = nil) then begin
+    new(nue);
+    nue^.dato := v;
+    nue^.sig := l;
+    l := nue;
+end;
+
+procedure agregarTres(var a3: arbolTres; v: venta);
+begin
+    if (a3 = nil) then
+    begin
         new(a3);
         a3^.dato.cod := v.cod;
-        new(nuevo);
-        nuevo^.dato := v;
-        nuevo^.sig := nil;
-        a3^.dato.ventas := nuevo;
+        a3^.dato.ventas := nil;
+        agregarAd(a3^.dato.ventas, v);
         a3^.dato.cont := 1;
         a3^.HI := nil;
         a3^.HD := nil;        
     end
     else if (v.cod < a3^.dato.cod) then
         agregarTres(a3^.HI, v)
-    else if (v.cod = a3^.dato.cod) then begin
-        new(nuevo);
-        nuevo^.dato := v;
-        nuevo^.sig := nil;
-        aux := a3^.dato.ventas;
-        while (aux^.sig <> nil) do
-            aux := aux^.sig;
-        aux^.sig := nuevo;
+    else if (v.cod = a3^.dato.cod) then
+    begin
+        agregarAd(a3^.dato.ventas, v);
         a3^.dato.cont := a3^.dato.cont + 1;
     end
     else
@@ -193,7 +193,8 @@ end;
 
 procedure cargarTres(a: arbol; var a3: arbolTres);
 begin
-    if (a <> nil) then begin
+    if (a <> nil) then
+    begin
         agregarTres(a3, a^.dato);
         cargarTres(a^.HI, a3);
         cargarTres(a^.HD, a3);
@@ -202,20 +203,21 @@ end;
 
 // Parte B
 
-function totalVendidoFecha(a: arbol; f: fechaReg): integer;
+function totalVendidoPorFecha(a: arbol; f: fechaReg): integer;
 begin
     if (a = nil) then
-        totalVendidoFecha := 0
-    else begin
+        totalVendidoPorFecha := 0
+    else 
+    begin
         if (a^.dato.fecha.dia = f.dia) and 
            (a^.dato.fecha.mes = f.mes) and 
            (a^.dato.fecha.anio = f.anio) then
-            totalVendidoFecha := a^.dato.uni + 
-                                 totalVendidoFecha(a^.HI, f) + 
-                                 totalVendidoFecha(a^.HD, f)
+            totalVendidoPorFecha := a^.dato.uni + 
+                                    totalVendidoPorFecha(a^.HI, f) + 
+                                    totalVendidoPorFecha(a^.HD, f)
         else
-            totalVendidoFecha := totalVendidoFecha(a^.HI, f) + 
-                                 totalVendidoFecha(a^.HD, f);
+            totalVendidoPorFecha := totalVendidoPorFecha(a^.HI, f) + 
+                                    totalVendidoPorFecha(a^.HD, f);
     end;
 end;
 
@@ -226,12 +228,14 @@ function maxUnidadesVendidas(a2: arbolDos): ventaDos;
 var
     izq, der, max: ventaDos;
 begin
-    if (a2 = nil) then begin
+    if (a2 = nil) then 
+    begin
         max.cod := -1;  // Indicador de árbol vacío
         max.total := 0;
         maxUnidadesVendidas := max;
     end
-    else begin
+    else 
+    begin
         max := a2^.dato;
         izq := maxUnidadesVendidas(a2^.HI);
         der := maxUnidadesVendidas(a2^.HD);
@@ -260,12 +264,14 @@ function maxCantidadVentas(a3: arbolTres): ventaList;
 var
     izq, der, max: ventaList;
 begin
-    if (a3 = nil) then begin
+    if (a3 = nil) then 
+    begin
         max.cod := -1;  // Indicador de árbol vacío
         max.cont := 0;
         maxCantidadVentas := max;
     end
-    else begin
+    else 
+    begin
         max := a3^.dato;
         izq := maxCantidadVentas(a3^.HI);
         der := maxCantidadVentas(a3^.HD);
@@ -292,25 +298,23 @@ var
     a: arbol;
     a2: arbolDos;
     a3: arbolTres;
-    f:fechaReg;
-    totalVendidoFecha:integer;
-    maxProdUnidades:integer;
-    maxProdVentas:integer;
-    maxVenta: ventaDos;
-    maxLista: ventaList;
+    f: fechaReg;
+    totalProductosVendidos: integer;
+    maxProdUnidades: integer;
+    maxProdVentas: integer;
 BEGIN
-	a:=nil;
-	a2:=nil;
-	a3:=nil;
+    a := nil;
+    a2 := nil;
+    a3 := nil;
     Randomize;
     cargar(a); // A i
-    generarArbolDos(a, a2); //A ii
+    generarArbolDos(a, a2); // A ii
     cargarTres(a, a3); // A iii
     leerfecha(f);
-    totalProdcutosVendidos := totalVendidoFecha(a,f); // B
-    writeln(f.dia,f.mes,f.anio,totalProductosVendidos);
+    totalProductosVendidos := totalVendidoPorFecha(a, f); // B
+    writeln('Total productos vendidos el ', f.dia, '/', f.mes, '/', f.anio, ': ', totalProductosVendidos);
     maxProdUnidades := codigoMaxUnidadesVendidas(a2); //C
-    writeln(maxProdUnidades);
-    maxProdVentas:=codigoMaxCantidadVentas(a3); //D
-    writeln(maxProdVentas);
+    writeln('Código del producto con más unidades vendidas: ', maxProdUnidades);
+    maxProdVentas := codigoMaxCantidadVentas(a3); //D
+    writeln('Código del producto con más ventas realizadas: ', maxProdVentas);
 END.
