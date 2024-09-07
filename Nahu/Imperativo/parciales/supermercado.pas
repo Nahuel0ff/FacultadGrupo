@@ -60,8 +60,12 @@ type
 	
 	
 	procedure cargarLista (var l:lista); // Se dispone
+	begin
+	end;
 
 	procedure cargarArbol (var a: arbol); // Se dispone
+	begin
+	end;
 
 	procedure agregar (var a:arbol; p:producto);
 	begin
@@ -82,15 +86,16 @@ type
 
 	procedure recorrer (var a:arbol; lp:listaProd);
 	begin
-		if (a^.dato.cod > lp^.dato.cod) then
-			recorrer(a^.HI,lp)
+		if (a = nil) then
+			agregar(a,lp^.dato)	
 		else
-			if (a^.dato.cod < lp^.dato.cod) then
-				recorrer(A^.HD,lp)
+			if (a^.dato.cod > lp^.dato.cod) then
+				recorrer(a^.HI,lp)
 			else
-				if (a = nil) then
-					agregar(a,lp^.dato);				
-				else if (a^.dato.cod = lp^.dato.cod) then
+				if (a^.dato.cod < lp^.dato.cod) then
+					recorrer(A^.HD,lp)
+				else
+					if (a^.dato.cod = lp^.dato.cod) then
 						a^.dato.cant:= a^.dato.cant - lp^.dato.cant;
 	end;
 
@@ -121,7 +126,18 @@ type
 	
 	
 	procedure comprendidos (a:arbol; cod1,cod2:integer;var lc:listaCod);
-	
+	begin
+		if (a <> nil) then begin
+			if (a^.dato.cod > cod1) AND (a^.dato.cod < cod2) then
+				agregarAd2(lc,a^.dato.cod)
+			else
+				if (a^.dato.cod < cod1) then
+					comprendidos(a^.HD,cod1,cod2,lc)
+				else
+					if (a^.dato.cod > cod2) then
+						comprendidos(a^.HI,cod1,cod2,lc);
+		end;
+	end;
 
 
 
@@ -133,11 +149,14 @@ var
 	l:lista;
 	a:arbol;
 	lc:listaCod;
+	cod1,cod2:integer;
 BEGIN
 	l:=nil;
-	a:nil;
+	a:=nil;
 	lc:=nil;
 	cargarLista(l);
 	cargarArbol(a);
+	read(cod1);
+	read(cod2);
+	comprendidos(a,cod1,cod2,lc);
 END.
-
