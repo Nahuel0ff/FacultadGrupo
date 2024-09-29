@@ -1,52 +1,41 @@
-
-package tema2;
-
+package practica2;
 import PaqueteLectura.Lector;
 
-public class Ejercicio5 {
-
-
-    public static void main(String[] args) {
-     
-        Partido vector [] = new Partido [20];
-        
-        int cant =0;
-        String loc = "";
-        String vis = "";
-        int golesBoca = 0;
-        int partRiver = 0;
-        do{
-            System.out.println("Ingrese equipo Local: ");
-            loc = Lector.leerString();
-            if (!loc.equals("ZZZ")) {
-                System.out.println("ingrese equipo Visitante: ");
-                vis = Lector.leerString();
-                if (!vis.equals("ZZZ")) {
-                    System.out.println("Ingrese la cantadidad de goles del equipo Local");
-                    int golLoc = Lector.leerInt();
-                    System.out.println("Ingrese la cantidad de goles del equpico Visitante");
-                    int golVis = Lector.leerInt();
-                    vector [cant] = new Partido(loc,vis,golLoc,golVis);
-            
-                    if (vector[cant].getGanador().equals("River")){
-                        partRiver +=1;
-                    }
-            
-                    if (loc.equals("Boca")){
-                        golesBoca +=golLoc;
-                     }
-            
-                    cant++;
-                }
-            }
-        } while (cant < 20 && !loc.equals("ZZZ") && !vis.equals("ZZZ"));
-        
-        for (int i=0; i<cant;i++){
-            System.out.println(vector[i].getLocal()+" "+vector[i].getGolesLocal()+" VS "+vector[i].getVisitante()+" "+vector[i].getGolesVisitante());
-        }
-        System.out.println("Cantidad de partidos ganados por River: " + partRiver);
-
-        System.out.println("Total de goles que Boca realizó como local: " + golesBoca);
-    }
+public class ejercicio5 {
+    public static void main(String [] args){
+      Partido partidos;
+      Partido [] vector = new Partido [20];
+      String nomVisitante;
+      int dimL = 0;
+      int i;
+      int ganaR = 0;
+      int golesB = 0;
+    
+      System.out.print("Nombre del equipo visitante: "); //Esta mal primero leer la condicion de corte? (si el enunciado dice EN ORDEN)
+      nomVisitante = Lector.leerString();
+      while((dimL < 20) && (!nomVisitante.equals("ZZZ"))){
+          System.out.print("Nombre del equipo local: ");
+          String nomLocal = (Lector.leerString());
+          System.out.print("Cantidad de goles del equipo local: ");
+          int golesLocal = (Lector.leerInt());
+          System.out.print("Cantidad de goles del equipo visitante: ");
+          int golesVisitante = (Lector.leerInt());
+          partidos = new Partido(nomLocal, nomVisitante,golesLocal,golesVisitante);
+          System.out.println("-----------------------------");
+          vector[dimL] = partidos;
+          dimL++;
+          System.out.println("Nombre del equipo visitante: "); 
+          nomVisitante = Lector.leerString();
+      }
+      for(i = 0; i<dimL; i++){
+          System.out.println("EQUIPO-LOCAL "+vector[i].getGolesLocal()+" VS EQUIPO-VISITANTE "+ vector[i].getGolesVisitante());
+          if(vector[i].getGanador().equals("River"))
+              ganaR++;
+          if(vector[i].getLocal().equals("Boca"))
+             golesB = golesB +vector[i].getGolesLocal();          
+      } 
+      System.out.println("La cantidad de partidos que gano river es de: "+ganaR);
+      System.out.println("La cantidad de goles que metio boca jugando de local es de: "+golesB);
+    }  
     
 }
