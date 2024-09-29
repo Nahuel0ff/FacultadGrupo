@@ -64,14 +64,14 @@ public class Triangulo {
         linea = colorLinea;
     }
     
-    public double calcularPerimetro(double primerLado, double segundoLado, double tercerLado){
+    public double calcularPerimetro(){
         double aux = lado1+lado2+lado3;
         return (aux);
     }
     
-    public double calcularArea(double base, double altura){
-        double aux = (base * altura)/2;
-        return(aux);
+    public double calcularArea(){
+        double s = (lado1 + lado2 + lado3) / 2;
+        return Math.sqrt(s * (s - lado1) * (s - lado2) * (s - lado3));
     }
     
     
