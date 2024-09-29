@@ -16,8 +16,8 @@ public class Ejercicio1 {
         
         Triangulo triangulo = new Triangulo(lado1,lado2,lado3,fondo,linea);
         
-        System.out.println(triangulo.calcularArea(lado2, lado3));
-        System.out.println(triangulo.calcularPerimetro(lado1, lado2, lado3));
+        System.out.println(triangulo.calcularArea());
+        System.out.println(triangulo.calcularPerimetro());
     }
     
 }
