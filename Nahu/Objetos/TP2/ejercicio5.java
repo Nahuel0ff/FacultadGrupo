@@ -11,7 +11,7 @@ public class ejercicio5 {
       int ganaR = 0;
       int golesB = 0;
     
-      System.out.print("Nombre del equipo visitante: "); //Esta mal primero leer la condicion de corte? (si el enunciado dice EN ORDEN)
+      System.out.print("Nombre del equipo visitante: ");
       nomVisitante = Lector.leerString();
       while((dimL < 20) && (!nomVisitante.equals("ZZZ"))){
           System.out.print("Nombre del equipo local: ");
