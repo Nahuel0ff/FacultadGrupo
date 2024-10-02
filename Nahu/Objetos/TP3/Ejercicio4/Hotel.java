@@ -39,10 +39,46 @@ public class Hotel {
         }
     }
     
+    public void agregarCliente(int unaHabitacion, Cliente cliente){
+        vectorHotel[unaHabitacion].setCliente(cliente);
+        vectorHotel[unaHabitacion].setOcupada(true);
+    }
+        
+        
+     public void ingresarClienteEnHabitacion(int numHabitacion, Cliente cliente) {
+        if (numHabitacion >= 1 && numHabitacion <= dimF && !vectorHotel[numHabitacion - 1].isOcupada()) {
+            vectorHotel[numHabitacion - 1].setCliente(cliente);
+            vectorHotel[numHabitacion - 1].setOcupada(true);
+            System.out.println("Cliente ingresado en la habitación " + numHabitacion);
+        } else {
+            System.out.println("La habitación " + numHabitacion + " ya está ocupada o no es válida.");
+        }
+    }    
+        
+        
+        
+        
+    public void aumentarPrecio(double incremento) {
+        for (int i = 0; i < dimL; i++) {
+            vectorHotel[i].setCosto(vectorHotel[i].getCosto() + incremento);
+        }
+    }
     
-    
-    
-    
+   
+     @Override
+    public String toString() {
+        String aux= "";
+        for(int i = 0; i<dimF; i++){
+            aux = aux + ("{Habitacion "+i+":"+vectorHotel[i].getCosto()+" ocupada "+vectorHotel[i].isOcupada());
+            if(vectorHotel[i].isOcupada())
+                aux = aux+ " -Los datos del cliente en esta habitacion: "+ vectorHotel[i].getCliente().toString();
+            else
+                aux = aux+ " habitacion desocupada";
+            aux = aux+ "\n";
+        }
+        return aux;
+    }
+
     
     
 }
