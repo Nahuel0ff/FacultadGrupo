@@ -3,7 +3,8 @@ package tema3;
 
 public class Ejercicio3 {
 
-   
+   // ESTA MAL HECHO, EL CONSTRUCTOR DEBERIA RECIBIR EL "PARAMETRO" EN LUGAR DE SETEARLO
+   // NO SE BUSCA EL AUTOR COMO PIDE LA CONSIGNA, FALTAN EJERCICIOS
     public static void main(String[] args) {
     
       Estante estant = new Estante(20);
