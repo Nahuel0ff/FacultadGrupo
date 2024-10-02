@@ -1,43 +1,31 @@
 package tema3;
-
-import PaqueteLectura.GeneradorAleatorio;
 import PaqueteLectura.Lector;
-
 public class Ejercicio4 {
-
-    
-    public static void main(String[] args) {
+    public static void main(String []args){
+        Hotel hotel = new Hotel(5);
+        String nombre;
         
-        GeneradorAleatorio.iniciar();
-        int n = 40;
-        Hotel hotel = new Hotel(n);
-        
-        int cant = 0;
-        while (cant < n){
-            double precio = GeneradorAleatorio.generarDouble((6000.00)+2000.00);
-            String nom = Lector.leerString();
+        System.out.print("Nombre: ");
+        nombre = Lector.leerString();
+        while(!nombre.equals("ZZZ")){
+            System.out.print("DNI: ");
             int dni = Lector.leerInt();
+            System.out.print("Edad: ");
             int edad = Lector.leerInt();
-            Cliente cli = new Cliente (nom,dni,edad);
+       
+            Cliente per = new Cliente(nombre,dni,edad);
+            System.out.print("Ingrese una habitacion: ");
+            hotel.agregarCliente(Lector.leerInt(), per);
+            System.out.println("-------------------------------");
             
-            cant++;
+            System.out.print("Nombre: ");
+            nombre = Lector.leerString();
         }
         
-        Cliente c = new Cliente("Carlos",33444111,47);
-        Habitacion hab1 = new Habitacion (3000.00,true,c);
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        System.out.println(hotel.toString());
+        System.out.print("Ingrese el aumento: ");
+        hotel.aumentarPrecio(Lector.leerDouble());
+        System.out.println(hotel.toString());
+               
     }
-    
 }
