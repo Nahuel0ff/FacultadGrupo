@@ -37,8 +37,10 @@ public abstract class Empleado {
     
     public abstract double calcularEfectividad();
     
+    public abstract double extra();
+    
     public double calcularSueldoACobrar() {
-        double aux = getSueldo() + ((getSueldo())*0.10)*getAntiguedad();
+        double aux = getSueldo() + ((getSueldo())*0.10)*getAntiguedad()+this.extra();
         return aux;
     }
     
@@ -48,6 +50,7 @@ public abstract class Empleado {
                      " y tiene una efectividad de "+this.calcularEfectividad();
         return aux;
     }
+    
     
     
 }
