@@ -1,43 +1,54 @@
 package tema4;
 
-public class Jugador extends Empleado{
-    private  int partJug;
-    private int golesAnot;
-
-    public Jugador(String unNombre, double unSueldo, int unAño,int cantGoles,int cantPart) {
-        super(unNombre, unSueldo, unAño);
-        setPartidosJugados(cantPart);
-        setGolesAnotados(cantGoles);
+public abstract class Empleado {
+    private String nombre;
+    private double sueldo;
+    private int antiguedad;
+    
+    public Empleado (String unNombre, double unSueldo, int unAño){
+        setNombre(unNombre);
+        setSueldo(unSueldo);
+        setAntiguedad(unAño);
     }
     
-    private void setPartidosJugados(int cantPart){
-        partJug = cantPart;
+    private void setNombre(String unNombre){
+        nombre = unNombre;
+    } 
+    
+    private void setSueldo(double unSueldo){
+        sueldo = unSueldo;
     }
     
-    private void setGolesAnotados (int cantGoles){
-        golesAnot = cantGoles;
-    }
-
-    public int getPartidosJugados(){
-        return partJug;
+    private void setAntiguedad (int unAño){
+        antiguedad = unAño;
     }
     
-    public int getGolesAnotados(){
-        return golesAnot;
+    public String getNombre(){
+        return nombre;
     }
-
-    @Override
-    public double calcularEfectividad() {
-        return (double) getGolesAnotados() / getPartidosJugados();
+    
+    public double getSueldo(){
+        return sueldo;
     }
-
-
-    @Override
-    public double extra() {
-        if (this.calcularEfectividad() > 0.5){
-            return getSueldo();
-        }
-        return 0;
+    
+    public int getAntiguedad(){
+        return antiguedad;
+    }
+    
+    public abstract double calcularEfectividad();
+    
+    public abstract double extra();
+    
+    public double calcularSueldoACobrar() {
+        double aux = getSueldo() + ((getSueldo())*0.10)*getAntiguedad()+this.extra();
+        return aux;
+    }
+    
+    public String toString(){
+        String aux = "El empleado: "+getNombre()+
+                     " debe cobrar: "+this.calcularSueldoACobrar()+
+                     " y tiene una efectividad de "+this.calcularEfectividad();
+        return aux;
     }
     
     
