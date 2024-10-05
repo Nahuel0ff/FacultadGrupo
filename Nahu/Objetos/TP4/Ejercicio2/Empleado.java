@@ -1,39 +1,45 @@
 package tema4;
 
-public class Entrenador extends Empleado {
-    private int campeonatosGan;
-    
-    public Entrenador(String unNombre, double unSueldo, int unAño,int cantCamp) {
+public class Jugador extends Empleado{
+    private  int partJug;
+    private int golesAnot;
+
+    public Jugador(String unNombre, double unSueldo, int unAño,int cantGoles,int cantPart) {
         super(unNombre, unSueldo, unAño);
-        setCampeonatos(cantCamp);
+        setPartidosJugados(cantPart);
+        setGolesAnotados(cantGoles);
     }
     
-    private void setCampeonatos(int cantCamp){
-        campeonatosGan = cantCamp;
+    private void setPartidosJugados(int cantPart){
+        partJug = cantPart;
     }
     
-    public int getCampeonatos(){
-        return campeonatosGan;
+    private void setGolesAnotados (int cantGoles){
+        golesAnot = cantGoles;
+    }
+
+    public int getPartidosJugados(){
+        return partJug;
+    }
+    
+    public int getGolesAnotados(){
+        return golesAnot;
     }
 
     @Override
     public double calcularEfectividad() {
-        return (double) getCampeonatos() / getAntiguedad();
+        return (double) getGolesAnotados() / getPartidosJugados();
     }
 
 
     @Override
     public double extra() {
-        int campeonatos = this.getCampeonatos();
-        if (campeonatos >= 1 && campeonatos <= 4){
-            return 5000.00; 
-        }else if (campeonatos >= 5 && campeonatos <= 10){
-            return 30000.00;
-        }else if (campeonatos > 10){
-            return 50000.00;
+        if (this.calcularEfectividad() > 0.5){
+            return getSueldo();
         }
         return 0;
     }
-        
+    
+    
     
 }
