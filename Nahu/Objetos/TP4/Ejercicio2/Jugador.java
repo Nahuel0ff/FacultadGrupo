@@ -31,12 +31,13 @@ public class Jugador extends Empleado{
         return (double) getGolesAnotados() / getPartidosJugados();
     }
 
-    public double calcularSueldoACobrar() {
-        double sueldoBase = super.calcularSueldoACobrar();
+
+    @Override
+    public double extra() {
         if (this.calcularEfectividad() > 0.5){
-            sueldoBase += getSueldo();
+            return getSueldo();
         }
-        return sueldoBase;
+        return 0;
     }
     
     
