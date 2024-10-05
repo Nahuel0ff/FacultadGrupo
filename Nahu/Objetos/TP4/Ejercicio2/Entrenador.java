@@ -21,17 +21,19 @@ public class Entrenador extends Empleado {
         return (double) getCampeonatos() / getAntiguedad();
     }
 
-    public double calcularSueldoACobrar() {
-        double sueldoBase = super.calcularSueldoACobrar();
+
+    @Override
+    public double extra() {
         int campeonatos = this.getCampeonatos();
         if (campeonatos >= 1 && campeonatos <= 4){
-            sueldoBase += 5000.00; 
+            return 5000.00; 
         }else if (campeonatos >= 5 && campeonatos <= 10){
-            sueldoBase += 30000.00;
+            return 30000.00;
         }else if (campeonatos > 10){
-            sueldoBase += 50000.00;
+            return 50000.00;
         }
-        return sueldoBase;
+        return 0;
     }
+        
     
 }
