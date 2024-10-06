@@ -5,7 +5,7 @@ import PaqueteLectura.Lector;
 
 public class Ejercicio4 {
 
-    
+// SINCERAMENTE DA RARA UNA PARTE PERO ES UN EMBOLE    
     
     public static void main(String[] args) {
         int z,y;
