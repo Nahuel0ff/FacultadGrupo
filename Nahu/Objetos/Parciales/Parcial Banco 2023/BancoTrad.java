@@ -45,10 +45,7 @@ public class BancoTrad extends Banco{
            if (this.getCantCuentasDol()<100){
                 aux=super.agregarCuenta(unaCuenta);
                 this.setCantCuentasDol(this.getCantCuentasDol()+1);
-           }else{
-               aux=false;
            }
-           aux =super.agregarCuenta(unaCuenta);
        }
        return aux;
     }
