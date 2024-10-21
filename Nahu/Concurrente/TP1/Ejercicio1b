@@ -1,0 +1,79 @@
+programa ejercicio1
+
+procesos
+  proceso juntarFlores(ES flores: numero; ES esquinasSinFlores: numero)
+  comenzar
+    si(HayFlorEnLaEsquina)
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        flores := flores + 1
+    sino
+      esquinasSinFlores := esquinasSinFlores + 1
+  fin
+
+  proceso caminarAvenida(ES flores: numero; ES esquinasSinFlores: numero)
+  comenzar
+    repetir 99
+      juntarFlores(flores, esquinasSinFlores)
+      mover
+    juntarFlores(flores, esquinasSinFlores)
+    Informar(flores)
+    Informar(esquinasSinFlores)
+  fin
+
+  proceso depositarFlores(E flores: numero)
+  comenzar
+    repetir flores
+      depositarFlor
+  fin
+
+areas
+  ciudad: AreaC(1, 1, 100, 100)
+
+robots
+  robot robot1
+  variables
+    flores: numero
+    esquinasSinFlores: numero
+  comenzar
+    flores := 0
+    esquinasSinFlores := 0
+    caminarAvenida(flores, esquinasSinFlores)
+    depositarFlores(flores)
+  fin
+
+  robot robot2
+  variables
+    flores: numero
+    esquinasSinFlores: numero
+  comenzar
+    flores := 0
+    esquinasSinFlores := 0
+    caminarAvenida(flores, esquinasSinFlores)
+    depositarFlores(flores)
+  fin
+
+  robot robot3
+  variables
+    flores: numero
+    esquinasSinFlores: numero
+  comenzar
+    flores := 0
+    esquinasSinFlores := 0
+    caminarAvenida(flores, esquinasSinFlores)
+    depositarFlores(flores)
+  fin
+
+variables
+  R_info: robot1
+  R_info2: robot2
+  R_info3: robot3
+
+comenzar
+  AsignarArea(R_info, ciudad)
+  AsignarArea(R_info2, ciudad)
+  AsignarArea(R_info3,ciudad)
+  Iniciar(R_info, 1, 1)
+  Iniciar(R_info2, 3, 1)
+  Iniciar(R_info3, 5, 1)
+fin
