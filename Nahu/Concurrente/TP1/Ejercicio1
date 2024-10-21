@@ -40,9 +40,8 @@ robots
   comenzar
     flores := 0
     esquinasSinFlores := 0
-    repetir 3
-      caminarAvenida(flores, esquinasSinFlores)
-      depositarFlores(flores)
+    caminarAvenida(flores, esquinasSinFlores)
+    depositarFlores(flores)
   fin
 
 variables
