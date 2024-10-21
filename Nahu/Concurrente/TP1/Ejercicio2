@@ -1,0 +1,82 @@
+programa ejercicio2
+
+procesos
+  proceso limpiar (ES papeles:numero)
+  comenzar
+    si(HayPapelEnLaEsquina)
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+  fin
+  
+  proceso recorrerYLimpiar(ES papeles:numero)
+  comenzar
+    repetir 20
+      limpiar(papeles)
+      mover
+    limpiar(papeles)
+    Informar(papeles)
+  fin
+  
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+
+areas
+  ciudad: AreaC(1,1,100,100)
+
+robots
+  robot robot1
+  variables
+    papeles:numero
+  comenzar
+    papeles:=0
+    recorrerYLimpiar(papeles)
+  fin
+  
+  robot robot2
+  variables
+    papeles:numero
+  comenzar
+    papeles:=0
+    derecha
+    recorrerYLimpiar(papeles)
+  fin
+  
+  robot robot3
+  variables
+    papeles:numero
+  comenzar
+    papeles:=0
+    repetir 2
+      derecha
+    recorrerYLimpiar(papeles)
+  fin
+  
+  robot robot4
+  variables
+    papeles:numero
+  comenzar
+    papeles:=0
+    izquierda
+    recorrerYLimpiar(papeles)
+  fin
+  
+variables
+  robotUno: robot1
+  robotDos: robot2
+  robotTres: robot3
+  robotCuatro: robot4
+
+comenzar
+  AsignarArea(robotUno,ciudad)
+  AsignarArea(robotDos,ciudad)
+  AsignarArea(robotTres,ciudad)
+  AsignarArea(robotCuatro,ciudad)
+  Iniciar(robotUno, 10, 10)
+  Iniciar(robotDos, 10, 30)
+  Iniciar(robotTres, 30, 30)
+  Iniciar(robotCuatro, 30, 10)
+fin
