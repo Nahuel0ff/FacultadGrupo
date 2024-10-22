@@ -1,0 +1,86 @@
+programa ejercicio3
+procesos
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso verificarEscalon (E dimension:numero; ES contador:numero)
+  variables
+    flores,papeles:numero
+  comenzar
+    flores:=0
+    papeles:=0
+    repetir dimension
+      si(HayFlorEnLaEsquina)
+        flores:= flores + 1
+      si (HayPapelEnLaEsquina)
+        papeles:= papeles + 1
+      mover
+    derecha
+    repetir dimension
+      si(HayFlorEnLaEsquina)
+        flores:= flores + 1
+      si (HayPapelEnLaEsquina)
+        papeles:= papeles + 1
+      mover
+    si (papeles > flores)
+      contador:= contador + 1
+  fin
+  
+  proceso recorrer(E dimension: numero;ES contador:numero)
+  comenzar
+    verificarEscalon(dimension,contador)
+    izquierda
+  fin
+  
+areas
+  ciudad: AreaC(1,1,100,100)
+  
+robots
+  robot robot1
+  variables
+    contador:numero
+  comenzar
+    contador:=0
+    recorrer(1,contador)
+    recorrer(2,contador)
+    recorrer(3,contador)
+    recorrer(4,contador)
+    Informar(contador)
+  fin
+  robot robot2
+  variables
+    contador:numero
+  comenzar
+    contador:=0
+    recorrer(1,contador)
+    recorrer(2,contador)
+    recorrer(3,contador)
+    recorrer(4,contador)
+    Informar(contador)
+  fin
+  robot robot3
+  variables
+    contador:numero
+  comenzar
+    contador:=0
+    recorrer(1,contador)
+    recorrer(2,contador)
+    recorrer(3,contador)
+    recorrer(4,contador)
+    Informar(contador)
+  fin
+  
+variables
+  robotUno: robot1
+  robotDos: robot2
+  robotTres: robot3
+comenzar
+  AsignarArea(robotUno, ciudad)
+  AsignarArea(robotDos, ciudad)
+  AsignarArea(robotTres, ciudad)
+  Iniciar(robotUno, 14,12)
+  Iniciar(robotDos, 17,10)
+  Iniciar(robotTres, 20,8)
+fin
