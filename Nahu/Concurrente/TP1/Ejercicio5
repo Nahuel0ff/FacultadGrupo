@@ -1,0 +1,98 @@
+programa Ejercicio5
+
+procesos
+  proceso limpiarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  
+  proceso limpiarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+
+  proceso vaciarFlores
+  comenzar
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+  
+  proceso vaciarPapeles
+  comenzar
+    mientras(HayPapelEnLaBolsa)
+      depositarPapel
+  fin
+
+  proceso recorrerYJuntarFlores (E dimension:numero)
+  comenzar
+    repetir dimension
+      limpiarFlores
+      mover
+    limpiarFlores
+    vaciarFlores
+  fin
+
+  proceso recorrerYJuntarPapeles (E dimension:numero)
+  comenzar
+    repetir dimension
+      limpiarPapeles
+      mover
+    limpiarPapeles
+  fin
+
+areas
+  ciudad : AreaC(1,1,100,100)
+  
+robots
+  robot robot1
+  comenzar
+    derecha
+    recorrerYJuntarFlores(15)
+    Pos(1,80)
+    recorrerYJuntarFlores(15)
+  fin
+
+  robot robot2
+  comenzar
+    recorrerYJuntarPapeles(20)
+    Pos(80,80)
+    vaciarPapeles
+    recorrerYJuntarPapeles(20)
+  fin
+
+  robot robot3
+  comenzar
+    derecha
+    recorrerYJuntarFlores(30)
+    Pos(70,15)
+    recorrerYJuntarFlores(30)
+  fin
+
+  robot robot4
+  comenzar
+    recorrerYJuntarPapeles(10)
+    Pos(15,1)
+    vaciarPapeles
+    recorrerYJuntarPapeles(10)
+  fin
+
+
+
+variables
+  r1 : robot1
+  r2 : robot2
+  r3 : robot3
+  r4 : robot4
+
+comenzar
+  AsignarArea(r1,ciudad)
+  AsignarArea(r2,ciudad)
+  AsignarArea(r3,ciudad)
+  AsignarArea(r4,ciudad)
+  Iniciar(r1, 1, 75)
+  Iniciar(r2, 75, 80)
+  Iniciar(r3, 70, 10)
+  Iniciar(r4, 10, 1)
+fin
